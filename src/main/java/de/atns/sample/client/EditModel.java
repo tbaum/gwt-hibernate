@@ -38,7 +38,7 @@ public class EditModel {
     }
 
     public void refresh() {
-        SampleRemote._.getInstance().loadAllByProp1AndB(entity.getProp1(), new AsyncCallback<EntityA>() {
+        SampleRemote._.getInstance().load(entity.getProp1(), new AsyncCallback<EntityA>() {
             public void onFailure(Throwable caught) {
                 Window.alert("Exception: " + caught);
             }

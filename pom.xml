@@ -221,4 +221,30 @@
         </dependency>
 
     </dependencies>
+
+    <repositories>
+         <repository>
+             <id>central</id>
+             <name>Archiva Managed Internal Repository</name>
+             <url>http://78.47.129.139:8180/repository/mirror</url>
+         </repository>
+         <repository>
+             <id>internal</id>
+             <name>Archiva Managed Internal Repository</name>
+             <url>http://78.47.129.139:8180/repository/internal</url>
+         </repository>
+     </repositories>
+    
+     <pluginRepositories>
+         <pluginRepository>
+             <id>central</id>
+             <name>Archiva Managed Internal Repository</name>
+             <url>http://78.47.129.139:8180/repository/mirror</url>
+         </pluginRepository>
+         <pluginRepository>
+             <id>internal</id>
+             <name>Archiva Managed Internal Repository</name>
+             <url>http://78.47.129.139:8180/repository/internal</url>
+         </pluginRepository>
+     </pluginRepositories>
 </project>

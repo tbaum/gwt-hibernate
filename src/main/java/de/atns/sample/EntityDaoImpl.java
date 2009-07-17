@@ -39,23 +39,20 @@ import java.util.List;
         });
     }
 
-    @Transactional(propagation = SUPPORTS) public EntityA loadA(final Integer id) {
-        return (EntityA) load(EntityA.class, id);
-    }
-
-    @Transactional(propagation = SUPPORTS)
-    public EntityA loadA(final String s) {
+    @Transactional(propagation = SUPPORTS) public EntityA load(final long s) {
         return (EntityA) execute(new HibernateCallback() {
             public Object doInHibernate(Session session) throws HibernateException, SQLException {
-                return session
-                        .createQuery("from EntityA a where a.prop1=:prop1")
-                        .setParameter("prop1", s)
+                final Object o = session
+                        .createQuery("from EntityA a left join fetch a.list where a.id =:id")
+                        .setParameter("id", s)
                         .uniqueResult();
+                System.err.println(o);
+                return o;
             }
         });
     }
 
-    @Transactional(propagation = SUPPORTS) public EntityA loadAfull(final String s) {
+    @Transactional(propagation = SUPPORTS) public EntityA load(final String s) {
         return (EntityA) execute(new HibernateCallback() {
             public Object doInHibernate(Session session) throws HibernateException, SQLException {
                 final Object o = session

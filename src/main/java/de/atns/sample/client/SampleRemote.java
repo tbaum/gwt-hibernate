@@ -8,6 +8,8 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import de.atns.sample.model.EntityA;
 
+import java.util.List;
+
 
 /**
  * User remote service definition
@@ -19,13 +21,13 @@ public interface SampleRemote extends RemoteService {
 // ------------------------ INTERFACE METHODS ------------------------
 
 
-// --------------------- Interface UserRemoteAsync ---------------------
+// --------------------- Interface SampleRemoteAsync ---------------------
 
+    public EntityA load(long s);
 
-    public EntityA loadAllByProp1(String s);
+    public EntityA load(String s);
 
-    public EntityA loadAllByProp1AndB(String s);
-
+    public List<EntityA> loadAll();
 
     public EntityA save(EntityA entityA);
 

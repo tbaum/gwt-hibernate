@@ -13,11 +13,9 @@ public interface EntityDao {
 
     Long countAll();
 
-    EntityA loadA(Integer id);
+    EntityA load(long id);
 
-    EntityA loadA(String login);
-
-    EntityA loadAfull(String login);
+    EntityA load(String login);
 
     List<EntityA> loadAll();
 
