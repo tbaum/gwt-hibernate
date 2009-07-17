@@ -6,9 +6,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
-
-       default-autowire="byName">
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
     <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
@@ -23,15 +21,21 @@
           p:password="crm"/>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
-          p:configLocation="classpath:/hibernate.cfg.xml"/>
+          p:configLocation="classpath:/hibernate.cfg.xml"
+          p:dataSource-ref="dataSource"/>
 
-    <bean id="persistenceUtil" class="net.sf.gilead.core.hibernate.HibernateUtil"/>
+    <bean id="persistenceUtil" class="net.sf.gilead.core.hibernate.HibernateUtil"
+          p:sessionFactory-ref="sessionFactory"/>
 
     <bean id="proxyStore" class="net.sf.gilead.core.store.stateless.StatelessProxyStore"/>
 
-    <bean id="persistentBeanManager" class="net.sf.gilead.core.PersistentBeanManager"/>
+    <bean id="persistentBeanManager" class="net.sf.gilead.core.PersistentBeanManager"
+          p:persistenceUtil-ref="persistenceUtil"
+          p:proxyStore-ref="proxyStore"/>
 
-    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager"/>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+          p:sessionFactory-ref="sessionFactory"
+          p:dataSource-ref="dataSource"/>
 
     <tx:annotation-driven/>
 
